@@ -1,4 +1,4 @@
-def chunk_text(text, chunk_size=500, overlap=50):
+def chunk_text(text, chunk_size=300, overlap=50):
     words = text.split()
     chunks = []
     
@@ -19,11 +19,8 @@ if __name__ == "__main__":
     titles = search_wikipedia("Wright brothers first flight")
     content = get_article_content(titles[0])
     
-    chunks = chunk_text(content, chunk_size=100, overlap=20)
-    
-    print(f"Total words in article: {len(content.split())}")
-    print(f"Number of chunks created: {len(chunks)}")
-    print("\n--- First chunk ---")
-    print(chunks[0])
-    print("\n--- Second chunk ---")
-    print(chunks[1])
+    for size in [100, 300, 600]:
+        chunks = chunk_text(content, chunk_size=size, overlap=int(size * 0.1))
+        print(f"\nChunk size = {size} words:")
+        print(f"  Number of chunks: {len(chunks)}")
+        print(f"  Sample chunk (first 150 chars): {chunks[0][:150]}...")
