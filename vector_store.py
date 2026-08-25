@@ -3,7 +3,7 @@ import chromadb
 
 model = SentenceTransformer('all-MiniLM-L6-v2')
 client = chromadb.Client()
-collection = client.create_collection(name="wiki_chunks")
+collection = client.get_or_create_collection(name="wiki_chunks")
 
 
 def add_chunks_to_store(chunks):
