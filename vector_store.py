@@ -6,11 +6,12 @@ client = chromadb.Client()
 collection = client.get_or_create_collection(name="wiki_chunks")
 
 
-def add_chunks_to_store(chunks):
+def add_chunks_to_store(chunks, article_title="article"):
     for i, chunk in enumerate(chunks):
         embedding = model.encode(chunk).tolist()
+        unique_id = f"{article_title}_{i}"
         collection.add(
-            ids=[str(i)],
+            ids=[unique_id],
             embeddings=[embedding],
             documents=[chunk]
         )

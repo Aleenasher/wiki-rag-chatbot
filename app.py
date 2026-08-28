@@ -18,7 +18,7 @@ if submitted and question:
         titles = search_wikipedia(question)
         content = get_article_content(titles[0])
         chunks = chunk_text(content, chunk_size=300, overlap=50)
-        add_chunks_to_store(chunks)
+        add_chunks_to_store(chunks, article_title=titles[0])
 
         answer = generate_answer(question)
         top_chunks = search_chunks(question, top_k=3)
